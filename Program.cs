@@ -28,9 +28,41 @@ namespace EjemploLinq
 
             PerformOperationsWithLinq();
 
+            LinqMethodBasedQuery();
         }
 
-        private static void PerformOperationsWithLinq(){
+        #region methods
+        private static void LinqMethodBasedQuery()
+        {
+            int[] numbers = { 5, 10, 8, 3, 6, 12 };
+
+            //Query syntax:
+            IEnumerable<int> numQuery1 =
+                from num in numbers
+                where num % 2 == 0
+                orderby num
+                select num;
+
+            //Method syntax:
+            IEnumerable<int> numQuery2 = numbers.Where(num => num % 2 == 0).OrderBy(n => n);
+
+            foreach (int i in numQuery1)
+            {
+                Console.Write(i + " ");
+            }
+            Console.WriteLine(System.Environment.NewLine);
+            foreach (int i in numQuery2)
+            {
+                Console.Write(i + " ");
+            }
+
+            // Keep the console open in debug mode.
+            Console.WriteLine(System.Environment.NewLine);
+            Console.WriteLine("Press any key to exit");
+            Console.ReadKey();
+        }
+        private static void PerformOperationsWithLinq()
+        {
             double[] radii = { 1, 2, 3 };
 
             // Query.
@@ -105,7 +137,6 @@ namespace EjemploLinq
            Beebe
         */
         }
-
         private static void JoinTwoDataSources()
         {
             IList<Customer> customers = new List<Customer>{
@@ -142,7 +173,7 @@ namespace EjemploLinq
                 group cust by cust.City into custGroup
                 where custGroup.Count() > 2
                 orderby custGroup.Key
-                select custGroup;        
+                select custGroup;
         }
         private static void LinqWithGrouping()
         {
@@ -167,7 +198,7 @@ namespace EjemploLinq
                     Console.WriteLine("    {0}", customer.FirstName);
                 }
             }
-          }
+        }
         private static void LinqWithoutGenericType()
         {
             IList<Customer> customers = new List<Customer>{
@@ -175,12 +206,12 @@ namespace EjemploLinq
                 new Customer{FirstName="John", LastName="Snow", City="London"}
             };
 
-            var customerQuery2 = 
+            var customerQuery2 =
                 from cust in customers
                 where cust.City == "London"
                 select cust;
 
-            foreach(var customer in customerQuery2)
+            foreach (var customer in customerQuery2)
             {
                 Console.WriteLine(customer.LastName + ", " + customer.FirstName);
             }
@@ -192,7 +223,7 @@ namespace EjemploLinq
                 new Customer{FirstName="Pedro", LastName="Alvarado", City="Buenos Aires"},
                 new Customer{FirstName="John", LastName="Snow", City="London"}
             };
-         
+
             IEnumerable<Customer> customerQuery =
                 from cust in customers
                 where cust.City == "London"
@@ -250,36 +281,35 @@ namespace EjemploLinq
                 Console.Write(i + " ");
             }
         }
-
+        #endregion
+        #region classes
         private class Customer
         {
-            public string LastName {get;set;}
-            public string FirstName {get;set;}
-            public string City {get;set;}
+            public string LastName { get; set; }
+            public string FirstName { get; set; }
+            public string City { get; set; }
         }
-
         private class Distributor
         {
-            public string Name {get;set;}
-            public string City {get;set;}
+            public string Name { get; set; }
+            public string City { get; set; }
         }
-
         private class Student
         {
             public string First { get; set; }
-            public string Last {get; set;}
+            public string Last { get; set; }
             public int ID { get; set; }
             public string Street { get; set; }
             public string City { get; set; }
             public List<int> Scores;
         }
-
         private class Teacher
         {
             public string First { get; set; }
             public string Last { get; set; }
-            public int ID { get; set; } 
+            public int ID { get; set; }
             public string City { get; set; }
         }
+        #endregion
     }
 }
