@@ -8,25 +8,25 @@ namespace EjemploLinq
     {
         static void Main(string[] args)
         {
-            ArrayWithLinq();
-            GetOddNumbers();
-            CountEvenNumbers();
-            LinqWithGenericType();
-            LinqWithoutGenericType();
-            //Ordering
-            //orderby cust.Name ascending
+            // ArrayWithLinq();
+            // GetOddNumbers();
+            // CountEvenNumbers();
+            // LinqWithGenericType();
+            // LinqWithoutGenericType();
+            // //Ordering
+            // //orderby cust.Name ascending
 
-            //Grouping
-            LinqWithGrouping();
-            //More than 2 customers
-            LinqGroupWithCondition();
+            // //Grouping
+            // LinqWithGrouping();
+            // // //More than 2 customers
+            // LinqGroupWithCondition();
 
-            //Join
-            JoinTwoDataSources();
+            // //Join
+            // JoinTwoDataSources();
 
-            LinqTransformData();
+            // LinqTransformData();
 
-            PerformOperationsWithLinq();
+            // PerformOperationsWithLinq();
 
             LinqMethodBasedQuery();
         }
@@ -157,6 +157,10 @@ namespace EjemploLinq
                 from cust in customers
                 join dist in distributors on cust.City equals dist.City
                 select new { CustomerName = cust.FirstName, DistributorName = dist.Name };
+
+            foreach (var query in innerJoinQuery){
+                Console.WriteLine(query.CustomerName +"-"+ query.DistributorName );
+            }
         }
         private static void LinqGroupWithCondition()
         {
@@ -171,7 +175,7 @@ namespace EjemploLinq
             var custQuery =
                 from cust in customers
                 group cust by cust.City into custGroup
-                where custGroup.Count() > 2
+                where custGroup.Count() > 1
                 orderby custGroup.Key
                 select custGroup;
         }
@@ -240,7 +244,7 @@ namespace EjemploLinq
 
             var evenNumQuery =
                 from num in numbers
-                where (num % 2) == 0
+                where (num % 2) != 0
                 select num;
 
             int evenNumCount = evenNumQuery.Count();
@@ -267,7 +271,7 @@ namespace EjemploLinq
         private static void ArrayWithLinq()
         {
             // Specify the data source.
-            int[] scores = new int[] { 97, 92, 81, 60 };
+            List<int> scores = new List<int> { 97, 92, 81, 60 };
 
             // Define the query expression.
             IEnumerable<int> scoreQuery =
