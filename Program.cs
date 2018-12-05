@@ -8,25 +8,25 @@ namespace EjemploLinq
     {
         static void Main(string[] args)
         {
-            // ArrayWithLinq();
-            // GetOddNumbers();
-            // CountEvenNumbers();
-            // LinqWithGenericType();
-            // LinqWithoutGenericType();
-            // //Ordering
-            // //orderby cust.Name ascending
+            ArrayWithLinq();
+            GetOddNumbers();
+            CountEvenNumbers();
+            LinqWithGenericType();
+            LinqWithoutGenericType();
+            //Ordering
+            //orderby cust.Name ascending
 
-            // //Grouping
-            // LinqWithGrouping();
-            // // //More than 2 customers
-            // LinqGroupWithCondition();
+            //Grouping
+            LinqWithGrouping();
+            // //More than 2 customers
+            LinqGroupWithCondition();
 
-            // //Join
-            // JoinTwoDataSources();
+            //Join
+            JoinTwoDataSources();
 
-            // LinqTransformData();
+            LinqTransformData();
 
-            // PerformOperationsWithLinq();
+            PerformOperationsWithLinq();
 
             LinqMethodBasedQuery();
         }
